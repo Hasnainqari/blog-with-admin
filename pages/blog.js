@@ -7,7 +7,7 @@ export default function Home({ blogs }) {
   return (
     <>
       <Head>
-        <title>My Blog</title>
+        <title>Latest Blog</title>
         <meta name="description" content="SEO Blog Website" />
       </Head>
 
@@ -35,9 +35,7 @@ export default function Home({ blogs }) {
       {/* ===== HERO SECTION ===== */}
       <section className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
         <div className="max-w-7xl mx-auto px-6 py-24 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Learn, Write & Grow with Our Blog
-          </h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">Latest Post</h2>
           <p className="max-w-2xl mx-auto text-lg text-blue-100">
             Discover high-quality articles on technology, development, and
             modern web practices written by professionals.
