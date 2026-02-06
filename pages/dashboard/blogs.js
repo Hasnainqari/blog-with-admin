@@ -1,3 +1,5 @@
+"use client";
+
 import Layout from "../../components/Layout";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
