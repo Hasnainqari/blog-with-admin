@@ -5,9 +5,7 @@ import { requireAuth } from "@/lib/auth";
 export default async function handler(req, res) {
   // 🔐 Require login
   const session = await requireAuth(req, res);
-  if (!session) {
-    return res.status(401).json({ message: "Unauthorized" });
-  }
+  if (!session) return;
 
   // 🚫 Only allow GET here
   if (req.method !== "GET") {
