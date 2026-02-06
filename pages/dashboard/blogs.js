@@ -5,19 +5,29 @@ import Swal from "sweetalert2";
 import Link from "next/link";
 
 export default function Blogs() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   async function fetchBlogs() {
     const res = await fetch("/api/blogs");
+
+    // 🔐 Handle unauthorized (VERY IMPORTANT)
+    if (res.status === 401) {
+      window.location.href = "/auth/login";
+      return;
+    }
+
     const data = await res.json();
-    setBlogs(data);
+    setBlogs(Array.isArray(data) ? data : []);
+    setLoading(false);
   }
 
   useEffect(() => {
-    fetchBlogs();
-  }, []);
-
+    if (status === "authenticated") {
+      fetchBlogs();
+    }
+  }, [status]);
   async function deleteBlog(id) {
     const confirm = await Swal.fire({
       title: "Are you sure?",
