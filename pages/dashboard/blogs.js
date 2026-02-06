@@ -9,37 +9,14 @@ export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
 
   async function fetchBlogs() {
-    try {
-      const res = await fetch("/api/blogs", {
-        credentials: "include", // 🔑 VERY IMPORTANT
-      });
-
-      if (!res.ok) {
-        console.error("Failed to fetch blogs:", res.status);
-        setBlogs([]); // ✅ NEVER break map()
-        return;
-      }
-
-      const data = await res.json();
-
-      if (!Array.isArray(data)) {
-        console.error("Blogs API did not return array:", data);
-        setBlogs([]); // ✅ SAFETY
-        return;
-      }
-
-      setBlogs(data);
-    } catch (err) {
-      console.error("Fetch blogs error:", err);
-      setBlogs([]);
-    }
+    const res = await fetch("/api/blogs");
+    const data = await res.json();
+    setBlogs(data);
   }
 
   useEffect(() => {
-    if (session) {
-      fetchBlogs();
-    }
-  }, [session]);
+    fetchBlogs();
+  }, []);
 
   async function deleteBlog(id) {
     const confirm = await Swal.fire({
