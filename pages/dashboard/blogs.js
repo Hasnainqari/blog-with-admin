@@ -36,8 +36,10 @@ export default function Blogs() {
   }
 
   useEffect(() => {
-    fetchBlogs();
-  }, []);
+    if (session) {
+      fetchBlogs();
+    }
+  }, [session]);
 
   async function deleteBlog(id) {
     const confirm = await Swal.fire({
